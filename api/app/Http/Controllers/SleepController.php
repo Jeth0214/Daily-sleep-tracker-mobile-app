@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sleep;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SleepController extends Controller
@@ -57,6 +58,14 @@ class SleepController extends Controller
     public function show($id)
     {
         //
+        $user = User::find($id);
+        if ($user) {
+            $response = Sleep::where('user_id', "=", $id)->paginate(7);
+            return response()->json($response, 200);
+        } else {
+            $response = "User does not exist";
+            return response()->json($response, 404);
+        }
     }
 
     /**
