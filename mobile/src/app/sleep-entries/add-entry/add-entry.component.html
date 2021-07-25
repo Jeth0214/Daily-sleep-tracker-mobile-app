@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tablinks/sleep-entries">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Daily Sleep Tracker</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card class="ion-padding">
+          <ion-card-header>
+            <ion-card-title>New Sleep Entry</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="addSleepEntryForm" (ngSubmit)="onSubmit(addSleepEntryForm)">
+              <!-- date -->
+              <ion-item>
+                <ion-label position="floating">Date: </ion-label>
+                <ion-datetime displayFormat="MMM DD" formControlName="date">
+        </ion-datetime>
+              </ion-item>
+
+              <ion-text color="danger" *ngIf="addSleepEntryForm.get('date').touched && addSleepEntryForm.get('date').invalid">
+                <small>Please enter a date.</small>
+              </ion-text>
+              <!-- Time Of Sleep -->
+              <ion-item>
+                <ion-label position="floating">Time Of Sleep:</ion-label>
+                <ion-datetime
+                (ionChange)="setSleepDuration()"
+                displayFormat="HH:mm"
+                formControlName="time_of_sleep">
+                </ion-datetime>
+              </ion-item>
+
+              <ion-text color="danger" *ngIf="addSleepEntryForm.get('time_of_sleep').touched && addSleepEntryForm.get('time_of_sleep').invalid">
+                <small>Please enter a time of sleep.</small>
+              </ion-text>
+              <!-- Wake Up Time -->
+              <ion-item>
+                <ion-label position="floating">Wake Up Time: </ion-label>
+                <ion-datetime
+                (ionChange)="setSleepDuration()"
+                displayFormat="HH:mm"
+                formControlName="wake_up_time">
+                </ion-datetime>
+              </ion-item>
+              <ion-text class="ion-margin-bottom" color="danger" *ngIf="addSleepEntryForm.get('wake_up_time').touched && addSleepEntryForm.get('wake_up_time').invalid">
+                <small>Please enter a wake up time.</small>
+              </ion-text>
+
+
+              <div class="line ion-margin-top"></div>
+              <ion-text class="ion-margin-horizontal">
+                <h5 >
+                  Sleep Duration: {{ sleepDuration | number: '1.0-2'}}
+                  <span *ngIf="sleepDuration > 0">Hours</span>
+                </h5>
+              </ion-text>
+
+              <!-- buttons -->
+              <ion-grid>
+                <ion-row class="ion-justify-content-evenly">
+                  <ion-col size="4">
+                    <ion-button shape="round" color="medium" size="small" [disabled]="!addSleepEntryForm.valid" (click)="reset()">Reset</ion-button>
+                  </ion-col>
+                  <ion-col size="4">
+                    <ion-button shape="round"  color="light"  size="small" routerLink="/tablinks/sleep-entries">Cancel</ion-button>
+                  </ion-col>
+                  <ion-col size="4">
+                    <ion-button type="submit" shape="round" color="primary"  size="small" [disabled]="!addSleepEntryForm.valid && !sleepDuration">submit</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

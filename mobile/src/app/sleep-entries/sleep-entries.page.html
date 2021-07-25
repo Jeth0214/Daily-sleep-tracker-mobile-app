@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Daily Sleep Tracker</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="sleep-entry">
+  <ion-grid class="sleep-entry-card" *ngIf="sleepEntries">
+    <ion-row >
+      <ion-col size-md="6" offset-md="3" >
+
+        <ion-card class="ion-padding-vertical">
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col class="ion-no-padding" size="2">
+                <ion-grid *ngIf="week !== 1" (click)="lastWeek()">
+                  <ion-row class="ion-justify-content-start ion-align-items-center">
+                    <ion-col size="3" class="ion-no-padding" >
+                      <div>
+                        <ion-icon name="caret-back-outline" color="primary"></ion-icon>
+                      </div>
+                    </ion-col>
+                    <ion-col size="9" class="ion-no-padding">
+                      <div class="ion-text-center">
+                        Last Week
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </ion-col>
+              <ion-col size="8">
+                <div class="ion-text-center">
+                  <table style="width: 100%;">
+                    <caption>Sleep Entries</caption>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time Of Sleep</th>
+                      <th>Wake up Time</th>
+                      <th>Sleep Duration</th>
+                    </tr>
+                    <tr *ngFor="let sleep of sleepEntries">
+                      <td>{{sleep.date}}</td>
+                      <td>{{sleep.time_of_sleep}}</td>
+                      <td>{{sleep.wake_up_time}}</td>
+                      <td>{{sleep.sleep_duration}}</td>
+                    </tr>
+                  </table>
+                </div>
+
+              </ion-col>
+              <ion-col class="ion-no-padding" size="2" (click)="nextWeek()" *ngIf="currentPage !== lastPage">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-end ion-align-items-center">
+                    <ion-col size="9" class="ion-no-padding">
+                      <div class="ion-text-center">
+                        Next Week
+                      </div>
+                    </ion-col>
+                    <ion-col size="3" class="ion-no-padding">
+                      <div>
+                        <ion-icon name="caret-forward-outline" color="primary"></ion-icon>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button routerLink="/tablinks/sleep-entries/add-entry" size="large" color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

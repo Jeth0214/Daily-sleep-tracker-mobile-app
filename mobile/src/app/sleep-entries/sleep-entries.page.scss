@@ -1,0 +1,23 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+
+.sleep-entry {
+--background: #e3f1ee !important;
+position: relative;
+  .sleep-entry-card {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  ion-card {
+    border-radius: 15px;
+  }
+  }
+}
+
